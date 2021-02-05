@@ -12,7 +12,7 @@ users selection.*/
     }
     addPhraseToDisplay(){
         const ulPhrase = document.getElementById('phrase').firstElementChild;
-        console.log(ulPhrase);
+        //console.log(ulPhrase);
         ulPhrase.innerHTML = '';
         const letters = this.phrase.split('');
         //console.log(letters);

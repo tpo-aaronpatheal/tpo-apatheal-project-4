@@ -26,7 +26,7 @@ handleInteraction methods*/
          //console.log(this.activePhrase);
          this.activePhrase.addPhraseToDisplay();
      }
-    handleInteraction() {}
+    //handleInteraction() {}
     removeLife(){
         const lostHeart = "images/lostHeart.png";
         //const liveHeart = document.querySelector("img[src ='images/liveHeart.png']"); 
@@ -46,7 +46,28 @@ handleInteraction methods*/
             }
         });
     }
+     gameOver(){
+        if (this.checkForWin() === true) {
+            wonGameMessage();
+        } else{
+            lostGameMessage();
+        }
+     }
 }
-     //gameOver();
- 
 
+
+
+/* These functions are called in the gameOver method after it determines whether or not the checkForWin method returns true or false. */
+     
+function wonGameMessage (){
+    const screenOverlay = document.getElementById('overlay');
+    const gameOverMessage = document.getElementById('game-over-message');
+    gameOverMessage.textContent('Congrats! You are a winner!')
+    screenOverlay.className = "win";
+}
+function lostGameMessage (){
+    const screenOverlay = document.getElementById('overlay');
+    const gameOverMessage = document.getElementById('game-over-message');
+    gameOverMessage.textContent('Oh no you lost! Better luck next time!') 
+    screenOverlay.className = "lose";
+}
