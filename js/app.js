@@ -29,13 +29,20 @@ const startGameButton = document.getElementById('btn__reset');
 startGameButton.addEventListener('click', function() {
     game = new Game();
     game.startGame();
+    game.reset();
 });
 
 //Event listener that listens for the users click on the onscreen keyboard.
 const keyboardButtons = document.querySelectorAll('.key');
-keyboardButtons.addEventListener('click', function(e) {
-    if(e.target.tagName === 'BUTTON'){
-        game.handleInteraction(e.target);
+keyboardButtons.forEach((keyboardButton) => {
+    keyboardButton.addEventListener('click', function(e) {
+        if(e.target.tagName === 'BUTTON'){
+            game.handleInteraction(e.target);
     }
 });
+});
 
+//Event Listener that listens for the users keyboard interaction. 
+//keyboardButtons.addEventListener('keydown', function(e){
+    
+//})

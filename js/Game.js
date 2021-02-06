@@ -78,7 +78,7 @@ handleInteraction methods*/
             buttons.classList.add('key'); 
         });
         const hearts = document.querySelectorAll('.tries > img');
-        hearts.src = liveHeart;  
+        liveHearts.src = hearts;  
     }
 }
 
