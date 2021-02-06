@@ -26,7 +26,20 @@ handleInteraction methods*/
          //console.log(this.activePhrase);
          this.activePhrase.addPhraseToDisplay();
      }
-    //handleInteraction() {}
+    handleInteraction(e) {
+        //console.log();
+        e.target.disabled = true;
+        if (phrase.includes(e.target.textContent)) {
+            e.target.classList.add('chosen'); 
+            this.showMatchedLetter();
+                if(this.checkForWin()){
+                    this.gameOver();
+                }
+        } else {
+            e.target.classList.add('wrong');
+            this.removeLife();
+        }
+    }
     removeLife(){
         const lostHeart = "images/lostHeart.png";
         //const liveHeart = document.querySelector("img[src ='images/liveHeart.png']"); 
@@ -48,26 +61,35 @@ handleInteraction methods*/
     }
      gameOver(){
         if (this.checkForWin() === true) {
-            wonGameMessage();
+            completeGame("win", "Congrats! You are a winner!");
         } else{
-            lostGameMessage();
+            completeGame("lose","Oh no you lost! Better luck next time!");
         }
      }
+    reset(){
+        const ulPhrase = document.getElementById('phrase').firstElementChild;
+        ulPhrase.innerHTML = '';
+        this.missed = 0;
+        const keyboardButtons = document.querySelectorAll('.key');
+        keyboardButtons.forEach((buttons) => {
+            buttons.disabled = false;
+            buttons.classList.remove('chosen');
+            buttons.classList.remove('wrong');
+            buttons.classList.add('key'); 
+        });
+        const hearts = document.querySelectorAll('.tries > img');
+        hearts.src = liveHeart;  
+    }
+}
+
+//Helper function for the gameOver method. This grabs a hold of h1 with an id of game-over-message as well as the div with an id of overlay. 
+//Overlay and message are passed through as parameters so when the completeGame function is called in the gameOver method,
+//they can be set to a certain value depending on wheter the user won or lost the game.
+function completeGame(overlay, message){
+const screenOverlay = document.getElementById('overlay');
+const gameOverMessage = document.getElementById('game-over-message');
+gameOverMessage.textContent= message;
+screenOverlay.className = overlay;
 }
 
 
-
-/* These functions are called in the gameOver method after it determines whether or not the checkForWin method returns true or false. */
-     
-function wonGameMessage (){
-    const screenOverlay = document.getElementById('overlay');
-    const gameOverMessage = document.getElementById('game-over-message');
-    gameOverMessage.textContent('Congrats! You are a winner!')
-    screenOverlay.className = "win";
-}
-function lostGameMessage (){
-    const screenOverlay = document.getElementById('overlay');
-    const gameOverMessage = document.getElementById('game-over-message');
-    gameOverMessage.textContent('Oh no you lost! Better luck next time!') 
-    screenOverlay.className = "lose";
-}

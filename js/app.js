@@ -31,7 +31,11 @@ startGameButton.addEventListener('click', function() {
     game.startGame();
 });
 
-
-
-//handleInteraction.addEventListener('click', function(event));
+//Event listener that listens for the users click on the onscreen keyboard.
+const keyboardButtons = document.querySelectorAll('.key');
+keyboardButtons.addEventListener('click', function(e) {
+    if(e.target.tagName === 'BUTTON'){
+        game.handleInteraction(e.target);
+    }
+});
 

@@ -23,7 +23,7 @@ users selection.*/
                 ulPhrase.innerHTML += '<li class="space"> </li>'; 
            }
         });     
-        ulPhrase.innerHTML = letters;
+        //ulPhrase.innerHTML += letter;
         //console.log(activePhrase);
 }
     checkLetter(letter) {
