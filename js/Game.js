@@ -56,7 +56,7 @@ handleInteraction methods*/
         let wonGame = true
         const hiddenLetters = document.querySelectorAll('.hide');
         hiddenLetters.forEach((hiddenLetter) => {
-            if(hiddenLetter.length !== 0){
+            if(hiddenLetter.length === 0){
             wonGame = true;
             return true;
             } else {
@@ -64,17 +64,17 @@ handleInteraction methods*/
             return false;
             }
         });
+        return wonGame;
     }
      gameOver(){
         if (this.checkForWin() === true) {
             completeGame("win", "Congrats! You are a winner!");
-        } else{
+        } else if(this.missed === 5) {
             completeGame("lose","Oh no you lost! Better luck next time!");
         }
      }
-   /* reset(){
+    reset(){
         const ulPhrase = document.getElementById('phrase').firstElementChild;
-        ulPhrase.innerHTML = '';
         this.missed = 0;
         const keyboardButtons = document.querySelectorAll('.key');
         keyboardButtons.forEach((buttons) => {
@@ -84,16 +84,19 @@ handleInteraction methods*/
             buttons.classList.add('key'); 
         });
         const hearts = document.querySelectorAll('.tries > img');
-        liveHearts.src = liveHeart;  
-    }*/
+        hearts.innerHTML = '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30"></img>';
+    }
 }
 
 //Helper function for the gameOver method. This grabs a hold of h1 with an id of game-over-message as well as the div with an id of overlay. 
 //Overlay and message are passed through as parameters so when the completeGame function is called in the gameOver method,
-//they can be set to a certain value depending on wheter the user won or lost the game.
+//they can be set to a certain value depending on wheter the user won or lost the game. I also updated the button text to equal "Restart Game."
 function completeGame(overlay, message){
+const restartGameButton = document.getElementById('btn__reset');     
+restartGameButton.innerText = 'Restart Game';
 const screenOverlay = document.getElementById('overlay');
 const gameOverMessage = document.getElementById('game-over-message');
+screenOverlay.style.display = 'block';
 gameOverMessage.textContent= message;
 screenOverlay.className = overlay;
 }

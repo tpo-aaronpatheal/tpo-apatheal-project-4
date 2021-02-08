@@ -26,10 +26,10 @@ console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);*/
 
 let game; 
 const startGameButton = document.getElementById('btn__reset');
-startGameButton.addEventListener('click', function() {
+startGameButton.addEventListener('click', function(e) {
     game = new Game();
     game.startGame();
-    //game.reset();
+    game.reset();
 });
 
 //Event listener that listens for the users click on the onscreen keyboard.
