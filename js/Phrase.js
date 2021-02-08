@@ -34,11 +34,13 @@ users selection.*/
         }
     };
     showMatchedLetter(letter) {
-        const matchingLetters = document.getElementsByClassName(letter);
+        const matchingLetters = document.querySelectorAll(`.${letter}`);
+        if(this.checkLetter = true){
         matchingLetters.forEach((matchingLetter) => {
             matchingLetter.classList.remove('hide');
             matchingLetter.classList.add('show');
         });
+        }
     }
  }
 

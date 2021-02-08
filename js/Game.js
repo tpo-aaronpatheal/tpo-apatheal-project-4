@@ -26,17 +26,18 @@ handleInteraction methods*/
          //console.log(this.activePhrase);
          this.activePhrase.addPhraseToDisplay();
      }
-    handleInteraction(e) {
-        //console.log();
-        e.target.disabled = true;
-        if (phrase.includes(e.target.textContent)) {
-            e.target.classList.add('chosen'); 
-            this.showMatchedLetter();
-                if(this.checkForWin()){
+    handleInteraction(button) {
+        //console.log(button);
+        button.disabled = true;
+        if (this.activePhrase.phrase.includes(button.textContent)) {
+            button.classList.add('chosen');
+            //console.log(button.textContent); 
+            //showMatchedLetter(button.textContent);
+                if(this.checkForWin() === true){
                     this.gameOver();
                 }
         } else {
-            e.target.classList.add('wrong');
+            button.classList.add('wrong');
             this.removeLife();
         }
     }
@@ -45,17 +46,20 @@ handleInteraction methods*/
         //const liveHeart = document.querySelector("img[src ='images/liveHeart.png']"); 
         const hearts = document.querySelectorAll('.tries > img');
         //console.log(scoreBoard);
-        this.missed += 1  
         hearts[this.missed].src = lostHeart;
+        this.missed += 1  
+        if(this.missed === 5) {
+            this.gameOver();
+        }
      }
     checkForWin(){
         let wonGame = true
-        const hiddenLetters = document.querySelectorAll('.hide letter');
+        const hiddenLetters = document.querySelectorAll(`.${letter}`);
         hiddenLetters.forEach((hiddenLetter) => {
             if(hiddenLetter.length !== 0){
-            wonGame = false
-            } else {
             wonGame = true;
+            } else {
+            wonGame = false;
             }
         });
     }
@@ -66,7 +70,7 @@ handleInteraction methods*/
             completeGame("lose","Oh no you lost! Better luck next time!");
         }
      }
-    reset(){
+   /* reset(){
         const ulPhrase = document.getElementById('phrase').firstElementChild;
         ulPhrase.innerHTML = '';
         this.missed = 0;
@@ -78,8 +82,8 @@ handleInteraction methods*/
             buttons.classList.add('key'); 
         });
         const hearts = document.querySelectorAll('.tries > img');
-        liveHearts.src = hearts;  
-    }
+        liveHearts.src = liveHeart;  
+    }*/
 }
 
 //Helper function for the gameOver method. This grabs a hold of h1 with an id of game-over-message as well as the div with an id of overlay. 
