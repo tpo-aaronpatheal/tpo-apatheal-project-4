@@ -54,12 +54,14 @@ handleInteraction methods*/
      }
     checkForWin(){
         let wonGame = true
-        const hiddenLetters = document.querySelectorAll(`.${letter}`);
+        const hiddenLetters = document.querySelectorAll('.hide');
         hiddenLetters.forEach((hiddenLetter) => {
             if(hiddenLetter.length !== 0){
             wonGame = true;
+            return true;
             } else {
             wonGame = false;
+            return false;
             }
         });
     }
