@@ -86,7 +86,7 @@ button {
 /* Title */
 
 .header {
-  color: #3a3f58;
+  color: #9932CC;
 }
 
 
@@ -134,7 +134,7 @@ button {
   background: #3a3f58;
   border-radius: 5px;
   font-size: var(--font-size-medium);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .wrong {

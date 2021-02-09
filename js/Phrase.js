@@ -34,6 +34,7 @@ users selection.*/
         }
     };
     showMatchedLetter(letter) {
+        //console.log(letter);
         const matchingLetters = document.querySelectorAll(`.${letter}`);
         if(this.checkLetter = true){
         matchingLetters.forEach((matchingLetter) => {
@@ -44,6 +45,5 @@ users selection.*/
     }
  }
 
- 
 
 

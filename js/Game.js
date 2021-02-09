@@ -2,7 +2,8 @@
  * Project 4 - OOP Game App
  * Game.js */
 /*Game class which contains methods for starting and ending the game. Within the game class are the checkForwin, removeLife, gameOver, getRandomPhrase, and 
-handleInteraction methods*/
+handleInteraction methods. This.missed is used to track the number of missed guesses by the player. The phrases array lists the potential phrases that can 
+be shown on the page at random when ever a new game starts. The active phrase represents the phrase that is currently in play. */
  class Game {
     constructor(){
         this.missed = 0;
@@ -15,10 +16,13 @@ handleInteraction methods*/
         ];
         this.activePhrase = null;
     }  
+    //This method selects a random phrase from the array of phrases.
     getRandomPhrase() {
         const randomPhrase = this.phrases[Math.floor(Math.random() * this.phrases.length)];
         return randomPhrase;
      }   
+     //The startGame method calls the getRandomPhrase method,sets the overlay style to "none", and calles the addPhraseToDisplay method(which
+     //is detailed in the Phrase.js.)
     startGame() {
          const overlay = document.querySelector('#overlay');
          overlay.style.display = 'none';
@@ -26,13 +30,15 @@ handleInteraction methods*/
          //console.log(this.activePhrase);
          this.activePhrase.addPhraseToDisplay();
      }
+     //The handleInteraction method disables the users selected letter button so that they cannot hit the same buttom more than once. The button class
+     //is also updated depending on whether the user selected a correct or incorrect letter. This method also calls the checkForWin, removeLife, and 
+     //gameOver methods.
     handleInteraction(button) {
         //console.log(button);
         button.disabled = true;
         if (this.activePhrase.phrase.includes(button.textContent)) {
             button.classList.add('chosen');
             //console.log(button.textContent); 
-            //showMatchedLetter(button.textContent);
                 if(this.checkForWin() === true){
                     this.gameOver();
                 }
@@ -41,9 +47,11 @@ handleInteraction methods*/
             this.removeLife();
         }
     }
+    //removeLife method removes a life from the score board when a player chooses an incorrect letter. As mentioned above, this.missed is
+    //used to track the number of wrong guesses the player has. Everytime a user misses a guess, a liveHeart is replaced with a lostHeart 
+    //and this.missed increases by one. Once this.missed is equal to 5, the player loses the game. 
     removeLife(){
         const lostHeart = "images/lostHeart.png";
-        //const liveHeart = document.querySelector("img[src ='images/liveHeart.png']"); 
         const hearts = document.querySelectorAll('.tries > img');
         //console.log(scoreBoard);
         hearts[this.missed].src = lostHeart;
@@ -52,6 +60,8 @@ handleInteraction methods*/
             this.gameOver();
         }
      }
+    //checkForWin method checks to see if the player has won the game by checking for hidden letters. If the player has revealed all the letters, then
+    //the method will return that the player has won. 
     checkForWin(){
         let wonGame = true
         const hiddenLetters = document.querySelectorAll('.hide');
@@ -66,6 +76,8 @@ handleInteraction methods*/
         });
         return wonGame;
     }
+    //This method displays the original start screen overlay and alters the screen to reflect the outcome of the game. There is a separate message
+    //that will desplay depending on whether or not the user won or lost. The completeGame function is detailed at the bottom.
      gameOver(){
         if (this.checkForWin() === true) {
             completeGame("win", "Congrats! You are a winner!");
@@ -73,8 +85,9 @@ handleInteraction methods*/
             completeGame("lose","Oh no you lost! Better luck next time!");
         }
      }
+     //This method is used to reset the gameboard once the "Reset Game" button is hit by the user. This method resets the liveHearts, chooses a new phrase,
+     //and updates the buttoms class.
     reset(){
-        const ulPhrase = document.getElementById('phrase').firstElementChild;
         this.missed = 0;
         const keyboardButtons = document.querySelectorAll('.key');
         keyboardButtons.forEach((buttons) => {
@@ -83,8 +96,10 @@ handleInteraction methods*/
             buttons.classList.remove('wrong');
             buttons.classList.add('key'); 
         });
-        const hearts = document.querySelectorAll('.tries > img');
-        hearts.innerHTML = '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30"></img>';
+        const hearts = document.querySelectorAll('.tries');
+        hearts.forEach((heart) => {
+            heart.innerHTML = '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30"></img>';
+        });
     }
 }
 
