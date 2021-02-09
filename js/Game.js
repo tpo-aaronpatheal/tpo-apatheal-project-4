@@ -86,7 +86,7 @@ be shown on the page at random when ever a new game starts. The active phrase re
         }
      }
      //This method is used to reset the gameboard once the "Reset Game" button is hit by the user. This method resets the liveHearts, chooses a new phrase,
-     //and updates the buttoms class.
+     //and updates the buttons class.
     reset(){
         this.missed = 0;
         const keyboardButtons = document.querySelectorAll('.key');
@@ -105,7 +105,7 @@ be shown on the page at random when ever a new game starts. The active phrase re
 
 //Helper function for the gameOver method. This grabs a hold of h1 with an id of game-over-message as well as the div with an id of overlay. 
 //Overlay and message are passed through as parameters so when the completeGame function is called in the gameOver method,
-//they can be set to a certain value depending on wheter the user won or lost the game. I also updated the button text to equal "Restart Game."
+//they can be set to a certain value depending on whether the user won or lost the game. I also updated the button text to equal "Restart Game."
 function completeGame(overlay, message){
 const restartGameButton = document.getElementById('btn__reset');     
 restartGameButton.innerText = 'Restart Game';

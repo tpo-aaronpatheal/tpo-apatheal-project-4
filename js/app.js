@@ -32,7 +32,7 @@ startGameButton.addEventListener('click', function(e) {
     game.reset();
 });
 
-//Event listener that listens for the users click on the onscreen keyboard. I also added a style which rotates the button that is clicked by 360 degrees.
+//Event listener that listens for the users click on the onscreen keyboard. The conditional also ensures that the event only fires when a button is hit. 
 const keyboardButtons = document.querySelectorAll('.key');
 keyboardButtons.forEach((keyboardButton) => {
         keyboardButton.addEventListener('click', function(e) {
@@ -40,7 +40,7 @@ keyboardButtons.forEach((keyboardButton) => {
             //console.log(e.target);
                 game.activePhrase.showMatchedLetter(e.target.textContent);
                 game.handleInteraction(e.target);
-                e.target.style.transform = "rotate(360deg)";
+                //e.target.style.transform = "rotate(360deg)";
              }
         });
 });
